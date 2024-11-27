@@ -52,7 +52,7 @@ $result = $conn->query($sql);
         </form>
     
 <!-- Modal de Sucesso -->
-<div id="modalSucesso" class="modal" style="display: none;">
+<div id="modalSucesso" class="modal" style="display: none;" onclick="recarregarPagina(event)">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <p>Novo lançamento registrado com sucesso!</p>
@@ -86,6 +86,13 @@ document.getElementById("formCadastro").addEventListener("submit", function(even
 // Função para fechar o modal
 function closeModal() {
     document.getElementById('modalSucesso').style.display = 'none';
+}
+
+// Função para recarregar a página ao clicar fora do modal
+function recarregarPagina(event) {
+    if (event.target === document.getElementById('modalSucesso')) {  // Verifica se o clique foi fora do conteúdo
+        location.reload();  // Recarrega a página
+    }
 }
 </script>
 
