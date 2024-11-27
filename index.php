@@ -40,31 +40,43 @@
 
  <!-- Gráficos dinâmicos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="graficoFluxo" width="400" height="200"></canvas>
+<canvas id="graficoFluxo" style="width:30%;max-width:400px; max-height:300px;"></canvas>
 
 <script>
-    var ctx = document.getElementById('graficoFluxo').getContext('2d');
-    var graficoFluxo = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Entradas', 'Saídas'],
-            datasets: [{
-                label: 'Fluxo de Caixa',
-                data: [1000, 500], // Dados dinâmicos podem ser gerados a partir de PHP
-                backgroundColor: ['#4caf50', '#f44336'],
-                borderColor: ['#4caf50', '#f44336'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+// Usar o fetch() para pegar os dados do PHP
+fetch('dados.php')
+    .then(response => response.json())
+    .then(data => {
+        // Agora temos os dados do PHP (entradas e saídas)
+        var entradas = data.entradas || 0;  // Definindo 0 caso o valor seja NULL ou undefined
+        var saidas = data.saidas || 0;      // Definindo 0 caso o valor seja NULL ou undefined
+
+        // Criar o gráfico com Chart.js
+        var ctx = document.getElementById('graficoFluxo').getContext('2d');
+        var graficoFluxo = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Entradas', 'Saídas'],
+                datasets: [{
+                    label: 'Fluxo de Caixa',
+                    data: [entradas, saidas],  // Dados dinâmicos de entradas e saídas
+                    backgroundColor: ['#4caf50', '#f44336'],  // Cor de fundo dos itens
+                    borderColor: ['#4caf50', '#f44336'],      // Cor das bordas
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+    })
+    .catch(error => console.error('Erro ao carregar os dados: ', error));
 </script>
+
 
 </body>
 
