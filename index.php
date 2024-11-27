@@ -24,7 +24,7 @@ $result = $conn->query($sql);
     <div class="container">
         <h1>Controle de Contas Pessoais</h1>
 
-        <form action="cadastro.php" method="POST">
+        <form id="formCadastro" method="POST">
             <label for="tipo">Tipo de Lançamento:</label>
             <select name="tipo" id="tipo">
                 <option value="receita">Receita</option>
@@ -51,6 +51,44 @@ $result = $conn->query($sql);
             <button type="submit">Cadastrar Lançamento</button>
         </form>
     
+<!-- Modal de Sucesso -->
+<div id="modalSucesso" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Novo lançamento registrado com sucesso!</p>
+    </div>
+</div>
+
+<!-- Script AJAX para enviar o formulário sem recarregar a página -->
+<script>
+document.getElementById("formCadastro").addEventListener("submit", function(event) {
+    event.preventDefault(); // Previne o envio padrão do formulário
+
+    var formData = new FormData(this);
+
+    // Enviar os dados via AJAX
+    fetch('cadastro.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Exibir o modal de sucesso
+        if (data.trim() === 'Novo lançamento registrado com sucesso!') {
+            document.getElementById('modalSucesso').style.display = 'block';
+        } else {
+            alert('Erro ao registrar lançamento: ' + data);
+        }
+    })
+    .catch(error => console.error('Erro na requisição AJAX:', error));
+});
+
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById('modalSucesso').style.display = 'none';
+}
+</script>
+
     <!-- Seção de Cards de Entradas e Saídas por Mês/Ano -->
     <div class="cards-container">
             <?php if ($result->num_rows > 0): ?>
