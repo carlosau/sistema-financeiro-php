@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Contas Pessoais</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
@@ -40,7 +40,7 @@
 
  <!-- Gráficos dinâmicos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="graficoFluxo" style="width:30%;max-width:400px; max-height:300px;"></canvas>
+<canvas id="graficoFluxo"></canvas>
 
 <script>
 // Usar o fetch() para pegar os dados do PHP

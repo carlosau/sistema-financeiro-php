@@ -1,0 +1,129 @@
+/* Resetando alguns estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    padding: 20px;
+}
+
+/* Centralizando o conteúdo principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+/* Estilo do formulário */
+form {
+    display: grid;
+    gap: 15px;
+}
+
+/* Estilizando os rótulos e inputs */
+label {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+select,
+input[type="number"],
+input[type="date"],
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+select:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="text"]:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+/* Estilo do botão */
+button {
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilizando o gráfico */
+canvas {
+    display: block;
+    margin: 30px auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    button {
+        font-size: 1.1em;
+    }
+
+    canvas {
+        width: 80%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    label,
+    input,
+    select {
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 1em;
+    }
+
+    canvas {
+        width: 100%;
+        max-width: 300px;
+    }
+}
