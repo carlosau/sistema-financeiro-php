@@ -1,3 +1,16 @@
+<?php
+include('db.php'); // Certifique-se de que está incluindo o arquivo de conexão com o banco
+// Consultar os dados de entradas e saídas por mês/ano
+$sql = "SELECT YEAR(data) AS ano, MONTH(data) AS mes, 
+               SUM(CASE WHEN tipo = 'receita' THEN valor ELSE 0 END) AS entradas,
+               SUM(CASE WHEN tipo = 'despesa' THEN valor ELSE 0 END) AS saidas
+        FROM lancamentos
+        GROUP BY YEAR(data), MONTH(data)
+        ORDER BY ano DESC, mes DESC";
+$result = $conn->query($sql);
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Contas Pessoais</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -36,7 +50,34 @@
 
             <button type="submit">Cadastrar Lançamento</button>
         </form>
+    
+    <!-- Seção de Cards de Entradas e Saídas por Mês/Ano -->
+    <div class="cards-container">
+            <?php if ($result->num_rows > 0): ?>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><?= $row['mes'] ?>/<?= $row['ano'] ?></h3>
+                                 <!-- Ícones de Editar e Excluir -->
+                            <div class="card-icons">
+                                <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Entradas:</strong> R$ <?= number_format($row['entradas'], 2, ',', '.') ?></p>
+                            <p><strong>Saídas:</strong> R$ <?= number_format($row['saidas'], 2, ',', '.') ?></p>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Não há lançamentos registrados.</p>
+            <?php endif; ?>
+        </div>
+    
     </div>
+
+
 
  <!-- Gráficos dinâmicos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -77,6 +77,78 @@ button:hover {
     background-color: #45a049;
 }
 
+/* Estilo dos cards */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;  /* Adicionando posição relativa para permitir o posicionamento absoluto dos ícones */
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Estilo do Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    text-align: left;
+    font-size: 1.4em;
+    color: #4caf50;
+}
+
+/* Alinhar os ícones Editar e Excluir */
+.card-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.card-icons button {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.card-icons button:hover {
+    color: #4caf50; /* Cor ao passar o mouse (hover) */
+}
+
+.card-body {
+    font-size: 1em;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Card Body */
+.card-body {
+    font-size: 1em;
+    color: #333;
+    margin-top: 10px;
+}
+
 /* Estilizando o gráfico */
 canvas {
     display: block;
@@ -95,6 +167,22 @@ canvas {
 
     form {
         gap: 10px;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card-header h3 {
+        font-size: 1.2em;
+    }
+
+    .card-icons button {
+        font-size: 1.2em;
     }
 
     button {
