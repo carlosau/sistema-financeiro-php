@@ -37,5 +37,35 @@
             <button type="submit">Cadastrar Lançamento</button>
         </form>
     </div>
+
+ <!-- Gráficos dinâmicos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="graficoFluxo" width="400" height="200"></canvas>
+
+<script>
+    var ctx = document.getElementById('graficoFluxo').getContext('2d');
+    var graficoFluxo = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Entradas', 'Saídas'],
+            datasets: [{
+                label: 'Fluxo de Caixa',
+                data: [1000, 500], // Dados dinâmicos podem ser gerados a partir de PHP
+                backgroundColor: ['#4caf50', '#f44336'],
+                borderColor: ['#4caf50', '#f44336'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
 </body>
+
 </html>
